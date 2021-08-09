@@ -1,0 +1,41 @@
+From b42f9f7df7f61d1fd894da7fc49909b5744e7fa5 Mon Sep 17 00:00:00 2001
+From: peijiankang <peijiankang@kylinos.cn>
+Date: Thu, 19 Aug 2021 10:54:38 +0800
+Subject: [PATCH] modify kylin-music complier error
+
+---
+ res.qrc        | 1 -
+ xatom-helper.h | 2 +-
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/res.qrc b/res.qrc
+index cd9260c..5c47630 100644
+--- a/res.qrc
++++ b/res.qrc
+@@ -93,7 +93,6 @@
+         <file>img/dark/icon_volume_small_w@2x.png</file>
+         <file>img/fengmian.png</file>
+         <file>translations/kylin-music_zh_CN.ts</file>
+-        <file>translations/kylin-music_zh_CN.qm</file>
+         <file>img/promptwhile.png</file>
+         <file>img/promptblack.png</file>
+         <file>img/kylin-music-logo.png</file>
+diff --git a/xatom-helper.h b/xatom-helper.h
+index f5b3e6d..854ff7e 100644
+--- a/xatom-helper.h
++++ b/xatom-helper.h
+@@ -18,10 +18,10 @@
+ #ifndef XATOMHELPER_H
+ #define XATOMHELPER_H
+ 
++#include <NETWM>
+ #include <QObject>
+ 
+ #include <X11/Xlib.h>
+-#include <NETWM>
+ 
+ struct UnityCorners {
+     ulong topLeft = 0;
+-- 
+2.27.0
+
