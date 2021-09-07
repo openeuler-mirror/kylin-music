@@ -1,0 +1,14 @@
+diff -Naur kylin-music-1.0.44/main.cpp kylin-music-1.0.44~/main.cpp
+--- kylin-music-1.0.44/main.cpp	2021-01-29 14:38:53.000000000 +0800
++++ kylin-music-1.0.44~/main.cpp	2021-09-03 23:20:43.491981530 +0800
+@@ -120,8 +120,8 @@
+     QString locale = QLocale::system().name();
+     QTranslator trans_global, trans_menu;
+     if(locale == "zh_CN"){
+-        trans_global.load(":/translations/kylin-music_zh_CN.qm");
+-        trans_menu.load(":/translations/qt_zh_CN.qm");
++        trans_global.load("kylin-music_zh_CN.qm","/usr/share/kylin-music");
++        trans_menu.load("qt_zh_CN.qm","/usr/share/kylin-music");
+         a.installTranslator(&trans_global);
+         a.installTranslator(&trans_menu);
+     }
