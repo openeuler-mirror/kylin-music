@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 Name:           kylin-music
 Version:        1.0.44
-Release:        2
+Release:        3
 Summary:        kylin-music
 License:        GPL-3.0 License
 URL:            https://github.com/UbuntuKylin/kylin-music
@@ -11,6 +11,7 @@ Source1:        kylin-music_zh_CN.qm
 
 patch0:	      	0001-modify-kylin-music-complier-error.patch
 patch1:         0001_fix_chinese_translation_issue.patch
+patch2:         fix_title_bar_issue.patch
 
 BuildRequires:  qt5-qtbase-devel
 BuildRequires:  qt5-qtscript-devel
@@ -44,6 +45,7 @@ kylin-music
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 
@@ -79,6 +81,9 @@ cp -r %{SOURCE1} %{buildroot}/usr/share/kylin-music
 %{_datadir}/kylin-music/
 
 %changelog
+* Wed Sep 08 2021 douyan <douyan@kylinos.cn> - 1.0.44-3
+- fix_title_bar_issue.patch
+
 * Mon Sep 06 2021 douyan <douyan@kylinos.cn> - 1.0.44-2
 - add missing translation
 
