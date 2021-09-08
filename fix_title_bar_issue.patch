@@ -1,0 +1,30 @@
+diff -Naur kylin-music-1.0.44/mainwid.cpp kylin-music-1.0.44~/mainwid.cpp
+--- kylin-music-1.0.44/mainwid.cpp	2021-01-29 14:38:53.000000000 +0800
++++ kylin-music-1.0.44~/mainwid.cpp	2021-09-08 15:37:33.642743012 +0800
+@@ -44,6 +44,11 @@
+     }
+     initStyle();//初始化样式
+ 
++    //hide title bar
++    Qt::WindowFlags flags = this->windowFlags();
++    flags |= Qt::FramelessWindowHint;
++    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Widget);
++
+     qDebug()<<"--------------------程序初始化完成--------------------";
+ }
+ 
+diff -Naur kylin-music-1.0.44/miniwidget.cpp kylin-music-1.0.44~/miniwidget.cpp
+--- kylin-music-1.0.44/miniwidget.cpp	2021-01-29 14:38:53.000000000 +0800
++++ kylin-music-1.0.44~/miniwidget.cpp	2021-09-08 15:36:58.098540593 +0800
+@@ -45,6 +45,11 @@
+     initMyApp();    // liucong add 20201222
+ 
+     initAction();
++
++    //hide title bar
++    Qt::WindowFlags flags = this->windowFlags();
++    flags |= Qt::FramelessWindowHint;
++    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Widget);
+ }
+ 
+ void miniWidget::initAction()
