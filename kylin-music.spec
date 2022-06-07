@@ -1,9 +1,9 @@
 %define debug_package %{nil}
 Name:           kylin-music
 Version:        1.0.44
-Release:        4
+Release:        5
 Summary:        kylin-music
-License:        GPL-3.0 License
+License:        GPL-3.0-or-later
 URL:            https://github.com/UbuntuKylin/kylin-music
 Source0:        %{name}-%{version}.tar.gz
 Source1:        kylin-music_zh_CN.qm
@@ -83,7 +83,10 @@ cp -r %{SOURCE1} %{buildroot}/usr/share/kylin-music
 %{_datadir}/kylin-music/
 
 %changelog
-* Thu Apr 7 2021 pei-jiankang <peijiankang@kylinos.cn> - 1.0.44-4
+* Wed May 18 2022 tanyulong<tanyulong@kylinos.cn> - 1.0.44-5
+- Improve the project according to the requirements of compliance improvement
+
+* Wed Apr 7 2021 pei-jiankang <peijiankang@kylinos.cn> - 1.0.44-4
 - modify version is error
 
 * Wed Sep 08 2021 douyan <douyan@kylinos.cn> - 1.0.44-3
