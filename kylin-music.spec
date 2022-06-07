@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 Name:           kylin-music
 Version:        1.0.44
-Release:        5
+Release:        6
 Summary:        kylin-music
 License:        GPL-3.0-or-later
 URL:            https://github.com/UbuntuKylin/kylin-music
@@ -67,9 +67,10 @@ pushd qmake-build
 %{make_install} INSTALL_ROOT=%{buildroot}
 popd 
 
-mkdir -p %{buildroot}/usr/share/kylin-music/data/
+mkdir -p %{buildroot}/usr/share/kylin-user-guide/data/guide
+mkdir -p %{buildroot}/usr/share/kylin-music
 
-cp -r %{_builddir}/%{name}-%{version}/data/kylin-music %{buildroot}/usr/share/kylin-music/data
+cp -r %{_builddir}/%{name}-%{version}/data/kylin-music %{buildroot}/usr/share/kylin-user-guide/data/guide/
 cp -r %{_builddir}/%{name}-%{version}/translations/* %{buildroot}/usr/share/kylin-music
 cp -r %{SOURCE1} %{buildroot}/usr/share/kylin-music
 
@@ -81,12 +82,16 @@ cp -r %{SOURCE1} %{buildroot}/usr/share/kylin-music
 %{_datadir}/glib-2.0/schemas/org.kylin-music-data.gschema.xml
 %{_datadir}/pixmaps/kylin-music.png
 %{_datadir}/kylin-music/
+%{_datadir}/kylin-user-guide/data/guide/*
 
 %changelog
+* Tue Jun 7 2022 peijiankang <peijiankang@kylinos.cn> - 1.0.44-6
+- add kylin-user-guide file
+
 * Wed May 18 2022 tanyulong<tanyulong@kylinos.cn> - 1.0.44-5
 - Improve the project according to the requirements of compliance improvement
 
-* Wed Apr 7 2021 pei-jiankang <peijiankang@kylinos.cn> - 1.0.44-4
+* Thu Apr 7 2022 peijiankang <peijiankang@kylinos.cn> - 1.0.44-4
 - modify version is error
 
 * Wed Sep 08 2021 douyan <douyan@kylinos.cn> - 1.0.44-3
