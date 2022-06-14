@@ -1,12 +1,12 @@
 %define debug_package %{nil}
 Name:           kylin-music
 Version:        1.1.2
-Release:        1
+Release:        2
 Summary:        kylin-music
 License:        GPL-3.0-or-later and MIT
 URL:            https://github.com/UbuntuKylin/kylin-music
 Source0:        %{name}-%{version}.tar.gz
-
+Source1:        libsimple.so
 
 patch0:	      	0001-fix-compile-error-of-kylin-music.patch
 
@@ -52,13 +52,16 @@ pushd qmake-build
 popd 
 
 mkdir -p %{buildroot}/usr/share/kylin-user-guide/data/guide
+mkdir -p %{buildroot}/usr/lib64
 
 cp -r %{_builddir}/%{name}-%{version}/data/kylin-music %{buildroot}/usr/share/kylin-user-guide/data/guide/
+cp -r %{SOURCE1} %{buildroot}/usr/lib64
 
 %files
 %doc debian/changelog
 %license  debian/copyright 
 %{_bindir}/kylin-music
+%{_libdir}/*
 %{_datadir}/applications/kylin-music.desktop
 %{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/pixmaps/kylin-music.png
@@ -66,6 +69,9 @@ cp -r %{_builddir}/%{name}-%{version}/data/kylin-music %{buildroot}/usr/share/ky
 %{_datadir}/kylin-user-guide/data/guide/*
 
 %changelog
+* Tue Jun 14 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-2
+- add libsimple.so
+
 * Tue Jun 14 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-1
 - update version to 1.1.2
 
