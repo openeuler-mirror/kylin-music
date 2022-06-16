@@ -1,0 +1,25 @@
+From dd2a1f9c19bc0109a7a9dc3db5b87885030c9a47 Mon Sep 17 00:00:00 2001
+From: peijiankang <peijiankang@kylinos.cn>
+Date: Fri, 10 Jun 2022 11:18:20 +0800
+Subject: [PATCH] fix compile error of kylin-music
+
+---
+ kylin-music.pro | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kylin-music.pro b/kylin-music.pro
+index 3c2b7e0..0cfa118 100644
+--- a/kylin-music.pro
++++ b/kylin-music.pro
+@@ -5,7 +5,7 @@ QT       += dbus x11extras KWindowSystem network
+ 
+ CONFIG += c++11
+ 
+-INCLUDEPATH += /usr/include/mpv/
++INCLUDEPATH += /usr/include/mpv/ /usr/include/ffmpeg
+ LIBS += -lmpv \
+ 
+ LIBS += -lpeony \
+-- 
+2.33.0
+
