@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 Name:           kylin-music
 Version:        1.1.2
-Release:        2
+Release:        3
 Summary:        kylin-music
 License:        GPL-3.0-or-later and MIT
 URL:            https://github.com/UbuntuKylin/kylin-music
@@ -69,6 +69,9 @@ cp -r %{SOURCE1} %{buildroot}/usr/lib64
 %{_datadir}/kylin-user-guide/data/guide/*
 
 %changelog
+* Thu Jun 16 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-3
+- remove kylin-music_zh_CN.qm
+
 * Tue Jun 14 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-2
 - add libsimple.so
 
