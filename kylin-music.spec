@@ -1,42 +1,31 @@
 %define debug_package %{nil}
 Name:           kylin-music
-Version:        1.0.44
-Release:        4
+Version:        1.1.2
+Release:        3
 Summary:        kylin-music
-License:        GPL-3.0 License
+License:        GPL-3.0-or-later and MIT
 URL:            https://github.com/UbuntuKylin/kylin-music
 Source0:        %{name}-%{version}.tar.gz
-Source1:        kylin-music_zh_CN.qm
+Source1:        libsimple.so
 
-
-patch0:	      	0001-modify-kylin-music-complier-error.patch
-patch1:         0001_fix_chinese_translation_issue.patch
-patch2:         fix_title_bar_issue.patch
-patch3:         0002-modify-version-is-error.patch
+patch0:	      	0001-fix-compile-error-of-kylin-music.patch
 
 BuildRequires:  qt5-qtbase-devel
+BuildRequires:  qtchooser
 BuildRequires:  qt5-qtscript-devel
 BuildRequires:  qt5-qttools-devel
 BuildRequires:  qt5-linguist
-BuildRequires:  qt5-qtbase-private-devel
-BuildRequires:  qt5-qtx11extras-devel
-BuildRequires:  zlib-devel
-BuildRequires:  libX11-devel
-BuildRequires:  libcrystalhd-devel
-BuildRequires:  qt5-qtsvg-devel
-BuildRequires:  libXext-devel
-BuildRequires:  taglib-devel
 BuildRequires:  qt5-qtmultimedia-devel
-BuildRequires:  gstreamer1-devel
-BuildRequires:  gstreamer1-plugins-bad-free-devel
-BuildRequires:  gstreamer1-plugins-good
+BuildRequires:  taglib-devel
 BuildRequires:  gsettings-qt-devel
+BuildRequires:  qt5-qtx11extras-devel
 BuildRequires:  kf5-kwindowsystem-devel
+BuildRequires:  ffmpeg-devel
+BuildRequires:  ukui-interface libpeony3 libpeony-dev
+BuildRequires:  mpv-libs-devel
+BuildRequires:  sqlite-devel libXtst-devel
 
 
-Requires:  gstreamer1
-Requires:  gstreamer1-plugins-bad-free
-Requires:  gstreamer1-plugins-good
 %description
 kylin-music
 
@@ -45,15 +34,10 @@ kylin-music
 
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %build
 
 export PATH=%{_qt5_bindir}:$PATH
-sed -i 's|/usr/lib/libtag.so|/usr/lib64/libtag.so|g' kylin-music.pro
-sed -i 's|/usr/lib/libtag_c.so|/usr/lib64/libtag_c.so|g' kylin-music.pro
 
 mkdir qmake-build
 pushd qmake-build
@@ -67,23 +51,40 @@ pushd qmake-build
 %{make_install} INSTALL_ROOT=%{buildroot}
 popd 
 
-mkdir -p %{buildroot}/usr/share/kylin-music/data/
+mkdir -p %{buildroot}/usr/share/kylin-user-guide/data/guide
+mkdir -p %{buildroot}/usr/lib64
 
-cp -r %{_builddir}/%{name}-%{version}/data/kylin-music %{buildroot}/usr/share/kylin-music/data
-cp -r %{_builddir}/%{name}-%{version}/translations/* %{buildroot}/usr/share/kylin-music
-cp -r %{SOURCE1} %{buildroot}/usr/share/kylin-music
+cp -r %{_builddir}/%{name}-%{version}/data/kylin-music %{buildroot}/usr/share/kylin-user-guide/data/guide/
+cp -r %{SOURCE1} %{buildroot}/usr/lib64
 
 %files
 %doc debian/changelog
 %license  debian/copyright 
 %{_bindir}/kylin-music
+%{_libdir}/*
 %{_datadir}/applications/kylin-music.desktop
-%{_datadir}/glib-2.0/schemas/org.kylin-music-data.gschema.xml
+%{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/pixmaps/kylin-music.png
 %{_datadir}/kylin-music/
+%{_datadir}/kylin-user-guide/data/guide/*
 
 %changelog
-* Thu Apr 7 2021 pei-jiankang <peijiankang@kylinos.cn> - 1.0.44-4
+* Thu Jun 16 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-3
+- remove kylin-music_zh_CN.qm
+
+* Tue Jun 14 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-2
+- add libsimple.so
+
+* Tue Jun 14 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-1
+- update version to 1.1.2
+
+* Tue Jun 7 2022 peijiankang <peijiankang@kylinos.cn> - 1.0.44-6
+- add kylin-user-guide file
+
+* Wed May 18 2022 tanyulong<tanyulong@kylinos.cn> - 1.0.44-5
+- Improve the project according to the requirements of compliance improvement
+
+* Thu Apr 7 2022 peijiankang <peijiankang@kylinos.cn> - 1.0.44-4
 - modify version is error
 
 * Wed Sep 08 2021 douyan <douyan@kylinos.cn> - 1.0.44-3
