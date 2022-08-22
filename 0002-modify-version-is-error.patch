@@ -1,0 +1,44 @@
+From 0a18f3ddd4f6effc425dd27225dd7e0d728656e6 Mon Sep 17 00:00:00 2001
+From: peijiankang <peijiankang@kylinos.cn>
+Date: Mon, 22 Aug 2022 14:23:24 +0800
+Subject: [PATCH] modify version is error
+
+---
+ UI/titlebar/menumodule.cpp | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/UI/titlebar/menumodule.cpp b/UI/titlebar/menumodule.cpp
+index 2bb5958..7265fba 100644
+--- a/UI/titlebar/menumodule.cpp
++++ b/UI/titlebar/menumodule.cpp
+@@ -283,6 +283,27 @@ QVBoxLayout* menuModule::initBody(){
+ 
+ //    bodyAppName->setStyleSheet("font-size:18px;");
+ //    bodyAppVersion->setFixedHeight(24);
++    FILE *pp = NULL;
++    char *line = NULL;
++    char *q = NULL;
++    size_t len = 0;
++
++    pp = popen("rpm -q kylin-music", "r");
++    if(pp) { while(getline(&line, &len, pp) != -1){
++        q = strrchr(line, '\n');
++        *q = '\0';
++        QString content = line;
++        QStringList list = content.split("-");
++        if (list.size() >= 3)
++            appVersion = list.at(2);
++        }
++    }
++    if(line){
++        free(line);
++       	line = NULL;
++    }
++    pclose(pp);
++
+     bodyAppVersion->setText(tr("Version: ") + appVersion);
+     bodyAppVersion->setAlignment(Qt::AlignLeft);
+ //    bodyAppVersion->setStyleSheet("font-size:14px;");
+-- 
+2.33.0
+
