@@ -1,14 +1,14 @@
 %define debug_package %{nil}
 Name:           kylin-music
 Version:        1.1.2
-Release:        3
+Release:        6
 Summary:        kylin-music
 License:        GPL-3.0-or-later and MIT
 URL:            https://github.com/UbuntuKylin/kylin-music
 Source0:        %{name}-%{version}.tar.gz
-Source1:        libsimple.so
 
 patch0:	      	0001-fix-compile-error-of-kylin-music.patch
+patch1:         0002-modify-version-is-error.patch
 
 BuildRequires:  qt5-qtbase-devel
 BuildRequires:  qtchooser
@@ -25,19 +25,24 @@ BuildRequires:  ukui-interface libpeony3 libpeony-dev
 BuildRequires:  mpv-libs-devel
 BuildRequires:  sqlite-devel libXtst-devel
 
-
 %description
 kylin-music
 
 
 %prep
-
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
-
 export PATH=%{_qt5_bindir}:$PATH
+pushd kylin-music-plugins-simple
+mkdir build
+pushd build
+cmake .. -DCMAKE_INSTALL_PREFIX:PATH=/usr
+%{make_build}
+popd
+popd
 
 mkdir qmake-build
 pushd qmake-build
@@ -46,22 +51,26 @@ pushd qmake-build
 popd 
 
 %install
+export PATH=%{_qt5_bindir}:$PATH
+pushd kylin-music-plugins-simple
+pushd build
+%{make_install} INSTALL_ROOT=%{buildroot}
+popd
+popd
 
 pushd qmake-build
 %{make_install} INSTALL_ROOT=%{buildroot}
 popd 
 
 mkdir -p %{buildroot}/usr/share/kylin-user-guide/data/guide
-mkdir -p %{buildroot}/usr/lib64
 
 cp -r %{_builddir}/%{name}-%{version}/data/kylin-music %{buildroot}/usr/share/kylin-user-guide/data/guide/
-cp -r %{SOURCE1} %{buildroot}/usr/lib64
 
 %files
 %doc debian/changelog
 %license  debian/copyright 
-%{_bindir}/kylin-music
-%{_libdir}/*
+%{_bindir}/*
+%{_libdir}/libsimple.so
 %{_datadir}/applications/kylin-music.desktop
 %{_datadir}/glib-2.0/schemas/*.xml
 %{_datadir}/pixmaps/kylin-music.png
@@ -69,6 +78,15 @@ cp -r %{SOURCE1} %{buildroot}/usr/lib64
 %{_datadir}/kylin-user-guide/data/guide/*
 
 %changelog
+* Mon Aug 22 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-6
+- modify version is error
+
+* Mon Aug 22 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-5
+- fix aarch64 install error
+
+* Wed Aug 17 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-4
+- fix nothing provides libpthread.so.0
+
 * Thu Jun 16 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-3
 - remove kylin-music_zh_CN.qm
 
