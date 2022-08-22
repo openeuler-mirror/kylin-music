@@ -1,13 +1,14 @@
 %define debug_package %{nil}
 Name:           kylin-music
 Version:        1.1.2
-Release:        5
+Release:        6
 Summary:        kylin-music
 License:        GPL-3.0-or-later and MIT
 URL:            https://github.com/UbuntuKylin/kylin-music
 Source0:        %{name}-%{version}.tar.gz
 
 patch0:	      	0001-fix-compile-error-of-kylin-music.patch
+patch1:         0002-modify-version-is-error.patch
 
 BuildRequires:  qt5-qtbase-devel
 BuildRequires:  qtchooser
@@ -29,9 +30,9 @@ kylin-music
 
 
 %prep
-
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 export PATH=%{_qt5_bindir}:$PATH
@@ -77,6 +78,9 @@ cp -r %{_builddir}/%{name}-%{version}/data/kylin-music %{buildroot}/usr/share/ky
 %{_datadir}/kylin-user-guide/data/guide/*
 
 %changelog
+* Mon Aug 22 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-6
+- modify version is error
+
 * Mon Aug 22 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-5
 - fix aarch64 install error
 
