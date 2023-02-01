@@ -1,7 +1,6 @@
-%define debug_package %{nil}
 Name:           kylin-music
 Version:        1.1.3
-Release:        1
+Release:        2
 Summary:        kylin-music
 License:        GPL-3.0-or-later and MIT
 URL:            https://github.com/UbuntuKylin/kylin-music
@@ -78,7 +77,10 @@ cp -r %{_builddir}/%{name}-%{version}/data/kylin-music %{buildroot}/usr/share/ky
 %{_datadir}/kylin-user-guide/data/guide/*
 
 %changelog
-* Mon Aug 22 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.3-1
+* Wed Feb 1 2023 peijiankang <peijiankang@kylinos.cn> - 1.1.3-2
+- add build debuginfo and debugsource
+
+* Tue Jan 31 2023 peijiankang <peijiankang@kylinos.cn> - 1.1.3-1
 - update version to 1.1.3
 
 * Mon Aug 22 2022 peijiankang <peijiankang@kylinos.cn> - 1.1.2-6
