@@ -1,0 +1,40 @@
+From ecdfd545096035a7092205d9f8a743d7185183ac Mon Sep 17 00:00:00 2001
+From: huayadong <huayadong@kylinos.cn>
+Date: Fri, 16 Jun 2023 16:11:25 +0800
+Subject: [PATCH] 
+ kylin-music-1.1.3_kylin_fix_install_the_repair_file_in_the_bin_directory.patch
+
+---
+ kylin-music-plugins-simple/src/CMakeLists.txt | 2 +-
+ kylin-music.pro                               | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/kylin-music-plugins-simple/src/CMakeLists.txt b/kylin-music-plugins-simple/src/CMakeLists.txt
+index 9ea83c9..0a7a126 100644
+--- a/kylin-music-plugins-simple/src/CMakeLists.txt
++++ b/kylin-music-plugins-simple/src/CMakeLists.txt
+@@ -18,7 +18,7 @@ set(SOURCE_FILES
+ 
+ if(SIMPLE_WITH_JIEBA)
+   include_directories(${SQLITE3_HEADERS_DIR} ${source_dir}/include ${source_dir}/deps)
+-  INSTALL(DIRECTORY ${source_dir}/dict/ DESTINATION bin/dict FILES_MATCHING PATTERN "*.utf8")
++  INSTALL(DIRECTORY ${source_dir}/dict/ DESTINATION share/kylin-music/dict FILES_MATCHING PATTERN "*.utf8")
+ else()
+   include_directories(${SQLITE3_HEADERS_DIR})
+ endif()
+diff --git a/kylin-music.pro b/kylin-music.pro
+index 0cfa118..bbb1af7 100644
+--- a/kylin-music.pro
++++ b/kylin-music.pro
+@@ -36,7 +36,7 @@ simple.files = $$PWD/kylin-music-plugins-simple/build/src/libsimple.so
+ simple.path = /usr/share/kylin-music
+ 
+ dict.files +=$$PWD/kylin-music-plugins-simple/build/cppjieba/dict
+-dict.path = /usr/bin/
++dict.path = /usr/share/kylin-music
+ 
+ qm_files.files = translations/*.qm
+ qm_files.path = /usr/share/kylin-music/translations/
+-- 
+2.36.1
+
